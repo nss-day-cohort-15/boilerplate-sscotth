@@ -2,7 +2,7 @@
   "name": "boilerplate-sscotth",
   "version": "1.0.0",
   "description": "",
-  "main": "Gruntfile.js",
+  "main": "src/index.html",
   "scripts": {
     "deploy": "gh-pages -d src",
     "start": "http-server src",
