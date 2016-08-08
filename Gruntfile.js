@@ -12,7 +12,7 @@ module.exports = function (grunt) {
   grunt.initConfig({
     jshint: {
       all: {
-        src: ['./**/*.js', '!./node_modules/**/*', '!./src/**/*', '!./Gruntfile.js'],
+        src: ['Gruntfile.js', './src/**/*.js', '!./src/lib/**/*'],
         options: {
           jshintrc: true
         }
@@ -20,7 +20,7 @@ module.exports = function (grunt) {
     },
     stylelint: {
       all: {
-        src: ['./**/*.css', '!./node_modules/**/*', '!./src/**/*']
+        src: ['./src/**/*.css', '!./src/lib/**/*']
       }
     },
     watch: {
@@ -28,25 +28,25 @@ module.exports = function (grunt) {
         livereload: true
       },
       js: {
-        files: ['./**/*.js', '!./node_modules/**/*', '!./src/**/*'],
+        files: ['Gruntfile.js', './src/**/*.js', '!./src/lib/**/*'],
         tasks: ['jshint']
       },
       html: {
-        files: ['./**/*.html', '!./node_modules/**/*', '!./src/**/*'],
+        files: ['./src/**/*.html', '!./src/lib/**/*'],
         tasks: ['htmlhint']
       },
       css: {
-        files: ['./**/*.css', '!./node_modules/**/*', '!./src/**/*'],
+        files: ['./src/**/*.css', '!./src/lib/**/*'],
         tasks: ['stylelint']
       },
       json: {
-        files: ['./**/*.json', '!./node_modules/**/*', '!./src/**/*'],
+        files: ['./src/**/*.json', '!./src/lib/**/*'],
         tasks: ['jsonlint']
       }
     },
     jsonlint: {
       all: {
-        src: ['./**/*.json', '!./node_modules/**/*', '!./src/**/*'],
+        src: ['./src/**/*.json', '!./src/lib/**/*'],
         options: {
           format: true,
           indent: 2
@@ -55,7 +55,7 @@ module.exports = function (grunt) {
     },
     htmlhint: {
       all: {
-        src: ['./**/*.html', '!./node_modules/**/*', '!./src/**/*'],
+        src: ['./src/**/*.html', '!./src/lib/**/*'],
         options: {
           htmlhintrc: '.htmlhintrc'
         }
