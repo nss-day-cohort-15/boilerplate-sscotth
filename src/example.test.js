@@ -1,3 +1,5 @@
+/* globals Example */
+
 'use strict';
 
 describe('Example', function () {

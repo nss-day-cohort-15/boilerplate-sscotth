@@ -1,3 +1,5 @@
+/* exported Example */
+
 'use strict';
 
 var Example = (function () {

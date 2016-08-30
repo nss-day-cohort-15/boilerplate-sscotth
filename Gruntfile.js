@@ -1,65 +1,85 @@
 'use strict';
 
+var PATHS = {
+  css: [
+    'src/**/*.css',
+    '!src/lib/**/*',
+  ],
+  html: [
+    'src/**/*.html',
+    '!src/lib/**/*',
+  ],
+  js: [
+    'Gruntfile.js',
+    'src/**/*.js',
+    '!src/lib/**/*',
+  ],
+  json: [
+    '.bowerrc',
+    '.htmlhintrc',
+    '.jshintrc',
+    '.stylelintrc',
+    '*.json',
+    'src/**/*.json',
+    '!src/lib/**/*',
+  ]
+};
+
 module.exports = function (grunt) {
   // Load grunt plugins
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-watch');
-  grunt.loadNpmTasks('grunt-stylelint');
-  grunt.loadNpmTasks('grunt-jsonlint');
   grunt.loadNpmTasks('grunt-htmlhint');
+  grunt.loadNpmTasks('grunt-jsonlint');
+  grunt.loadNpmTasks('grunt-stylelint');
 
   // Plugin configuration
   grunt.initConfig({
+    htmlhint: {
+      src: PATHS.html,
+      options: {
+        htmlhintrc: '.htmlhintrc',
+      },
+    },
     jshint: {
-      all: {
-        src: ['Gruntfile.js', './src/**/*.js', '!./src/lib/**/*'],
-        options: {
-          jshintrc: true
-        }
-      }
+      src: PATHS.js,
+      options: {
+        jshintrc: true,
+      },
+    },
+    jsonlint: {
+      src: PATHS.json,
     },
     stylelint: {
-      all: {
-        src: ['./src/**/*.css', '!./src/lib/**/*']
-      }
+      src: PATHS.css,
     },
     watch: {
       options: {
-        livereload: true
+        livereload: true,
       },
       js: {
-        files: ['Gruntfile.js', './src/**/*.js', '!./src/lib/**/*'],
-        tasks: ['jshint']
+        files: PATHS.js,
+        tasks: ['jshint'],
       },
       html: {
-        files: ['./src/**/*.html', '!./src/lib/**/*'],
-        tasks: ['htmlhint']
+        files: PATHS.html,
+        tasks: ['htmlhint'],
       },
       css: {
-        files: ['./src/**/*.css', '!./src/lib/**/*'],
-        tasks: ['stylelint']
+        files: PATHS.css,
+        tasks: ['stylelint'],
       },
       json: {
-        files: ['./src/**/*.json', '!./src/lib/**/*'],
-        tasks: ['jsonlint']
-      }
+        files: PATHS.json,
+        tasks: ['jsonlint'],
+      },
     },
-    jsonlint: {
-      all: {
-        src: ['./src/**/*.json', '!./src/lib/**/*'],
-        options: {
-          format: true,
-          indent: 2
-        }
-      }
-    },
-    htmlhint: {
-      all: {
-        src: ['./src/**/*.html', '!./src/lib/**/*'],
-        options: {
-          htmlhintrc: '.htmlhintrc'
-        }
-      }
-    }
   });
+
+  grunt.registerTask('lint', [
+    'htmlhint',
+    'jshint',
+    'jsonlint',
+    'stylelint',
+  ]);
 };
